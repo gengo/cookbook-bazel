@@ -10,6 +10,10 @@
 include_recipe 'java'
 include_recipe 'zip' unless node.platform_family == 'mac_os_x'
 
+if platform_family?('rhel', 'centos')
+  package 'which'
+end
+
 case spec = [node.os, node.kernel.machine]
 when ['darwin', 'x86_64'], ['linux', 'x86_64']
   version = node.bazel.version
