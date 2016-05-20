@@ -14,3 +14,6 @@ group :docker do
   gem 'kitchen-docker_cli', '~> 0.15.0'
 end
 
+group :local do
+  gem 'kitchen-local', git: 'https://github.com/gengo/kitchen-local.git'
+end

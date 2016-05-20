@@ -1,0 +1,38 @@
+language: c
+sudo: required
+
+matrix:
+  include:
+  - os: linux
+    dist: trusty
+    services:
+    - docker
+    cache:
+      apt: true
+    env:
+    - KITCHEN_LOCAL_YAML=.kitchen.docker.yml
+    addons:
+      apt:
+        sources:
+          - chef-stable-trusty
+        packages:
+          - chefdk
+  - os: osx
+    osx_image: xcode7.3
+    env:
+    - KITCHEN_LOCAL_YAML=.kitchen.local.yml
+    before_install:
+    - brew tap caskroom/cask
+    - brew update
+    - brew cask install chefdk
+
+install:
+- chef --version
+- eval "$(chef shell-init bash)"
+- chef exec bundle install
+
+script:
+- chef exec foodcritic -f any -X spec .
+- chef exec rake spec --trace --verbose
+- chef exec bundle exec kitchen diagnose
+- chef exec bundle exec kitchen test all -l debug

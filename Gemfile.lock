@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/gengo/kitchen-local.git
+  revision: 0685c5daf21fc26c4e0b88fc819fa81dcaeedf9f
+  specs:
+    kitchen-local (0.0.2)
+      test-kitchen
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -269,6 +276,7 @@ DEPENDENCIES
   berkshelf (~> 4.3)
   chef-dk
   kitchen-docker_cli (~> 0.15.0)
+  kitchen-local!
   kitchen-vagrant
   rake
   test-kitchen (~> 1.7)
