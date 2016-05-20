@@ -20,18 +20,21 @@ Attributes
   </tr>
   <tr>
     <td><tt>['bazel']['version']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td>String</td>
+    <td>Bazel version to install</td>
+    <td><tt>0.2.3</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['bazel']['prefix']</tt></td>
+    <td>String</td>
+    <td>installation prefix</td>
+    <td><tt>/usr/local</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### bazel::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
 Just include `bazel` in your node's `run_list`:
 
 ```json
@@ -45,16 +48,16 @@ Just include `bazel` in your node's `run_list`:
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
+3. Write chefspec for the feature (if applicable)
+4. Write your change
+4. Write serverspec for the feature (if applicable)
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Copyright 2016 Gengo Inc.
+
+BSD 3-Clause license
