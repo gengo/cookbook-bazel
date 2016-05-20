@@ -5,7 +5,12 @@ describe command('/usr/local/bin/bazel') do
 end
 
 workspace = File.join(File.dirname(__FILE__), 'test_workspace')
-describe command("cd #{workspace} && bazel run //:cc_hello") do
+describe command("cd #{workspace} && /usr/local/bin/bazel run //:cc_hello") do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should contain /Hello, World!/ }
+end
+
+describe command("cd #{workspace} && /usr/local/bin/bazel run //:java_hello") do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should contain /Hello, World!/ }
 end
