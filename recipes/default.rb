@@ -9,6 +9,7 @@
 
 include_recipe 'java'
 include_recipe 'zip' unless node.platform_family == 'mac_os_x'
+include_recipe 'bazel::cxx'
 
 if platform_family?('rhel', 'centos')
   package 'which'

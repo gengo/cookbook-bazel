@@ -1,5 +1,11 @@
 require_relative 'spec_helper'
 
-describe command('bazel') do
+describe command('/usr/local/bin/bazel') do
   its(:exit_status) { should eq 0 }
+end
+
+workspace = File.join(File.dirname(__FILE__), 'test_workspace')
+describe command("cd #{workspace} && bazel run //:cc_hello") do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should contain /Hello, World!/ }
 end
