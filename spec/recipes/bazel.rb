@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-describe 'bazel::default' do
+describe 'bazel::bazel' do
   [
     %w[ ubuntu   14.04   ],
     %w[ mac_os_x 10.11.1 ],

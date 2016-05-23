@@ -14,4 +14,6 @@ supports 'ubuntu'
 
 depends 'build-essential'
 depends 'java'
+depends 'poise-python'
 depends 'zip'
+depends 'homebrew'

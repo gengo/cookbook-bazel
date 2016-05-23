@@ -14,3 +14,15 @@ describe command("cd #{workspace} && /usr/local/bin/bazel run //:java_hello") do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should contain /Hello, World!/ }
 end
+
+describe command("cd #{workspace} && /usr/local/bin/bazel run //:py2_hello") do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should contain /Hello, World!/ }
+  its(:stdout) { should contain /^version: 2\.7/ }
+end
+
+describe command("cd #{workspace} && /usr/local/bin/bazel run //:py3_hello") do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should contain /Hello, World!/ }
+  its(:stdout) { should contain /^version: 3/ }
+end

@@ -1,5 +1,4 @@
-include_attribute 'java'
-default.java.jdk_version = 8
+include_attribute 'bazel::bazel'
 
-default.bazel.version = '0.2.3'
-default.bazel.prefix = '/usr/local'
+default.bazel.install_python2 = true
+default.bazel.install_python3 = true
