@@ -9,7 +9,3 @@ platforms:
     driver_config:
       platform: ubuntu
       image: ubuntu:14.04
-  - name: centos-7
-    driver_config:
-      platform: centos
-      image: centos:7
