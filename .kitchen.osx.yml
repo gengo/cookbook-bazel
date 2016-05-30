@@ -1,0 +1,13 @@
+---
+driver:
+  name: local
+transport:
+  name: local
+provisioner:
+  require_chef_omnibus: false
+  chef_omnibus_root: /opt/chefdk
+verifier:
+  chef_omnibus_root: /opt/chefdk
+
+platforms:
+  - name: mac_os_x
