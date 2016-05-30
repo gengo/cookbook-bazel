@@ -2,10 +2,21 @@ bazel Cookbook
 =======================
 Installs/Upgrades [Bazel](https://bazel.io)
 
+[![Build Status](https://travis-ci.org/gengo/cookbook-bazel.svg?branch=master)](https://travis-ci.org/gengo/cookbook-bazel)
+
+
 Requirements
 ------------
+#### chef
+Chef 12+
 
 #### cookbooks
+* build-essential
+* java
+* poise-python
+* zip
+* apt
+* homebrew
 
 Attributes
 ----------
