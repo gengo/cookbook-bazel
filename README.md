@@ -1,6 +1,6 @@
 bazel Cookbook
 =======================
-Installs/Upgrades [Bazel](https://bazel.io)
+Installs/Configures [Bazel](http://bazel.io)
 
 [![Build Status](https://travis-ci.org/gengo/cookbook-bazel.svg?branch=master)](https://travis-ci.org/gengo/cookbook-bazel)
 
