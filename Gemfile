@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rake'
 
-gem 'chef-dk'
 gem 'berkshelf', '~> 4.3'
 gem 'test-kitchen', '~> 1.7'
+gem 'chefspec'
 
 group :vagrant do
   gem 'kitchen-vagrant'

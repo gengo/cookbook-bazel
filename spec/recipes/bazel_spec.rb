@@ -25,6 +25,9 @@ describe 'bazel::bazel' do
       let(:installer_path) {
         File.join(Chef::Config[:file_cache_path], installer_name)
       }
+      before do
+        stub_command("which git").and_return(true)
+      end
 
       it 'installs JDK' do
         expect(chef_run).to include_recipe('java')
