@@ -21,6 +21,16 @@ matrix:
     osx_image: xcode7.3
     env:
     - KITCHEN_LOCAL_YAML=.kitchen.osx.yml
+    - KITCHEN_TARGET=default
+    before_install:
+    - brew tap caskroom/cask
+    - brew update
+    - brew cask install chefdk
+  - os: osx
+    osx_image: xcode7.3
+    env:
+    - KITCHEN_LOCAL_YAML=.kitchen.osx.yml
+    - KITCHEN_TARGET=package
     before_install:
     - brew tap caskroom/cask
     - brew update
@@ -35,4 +45,4 @@ script:
 - chef exec foodcritic -f any -X spec .
 - chef exec rake spec --trace --verbose
 - chef exec bundle exec kitchen diagnose
-- chef exec bundle exec kitchen test all -l debug
+- chef exec bundle exec kitchen test ${KITCHEN_TARGET:-all} -l debug

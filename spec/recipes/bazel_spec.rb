@@ -8,8 +8,10 @@ describe 'bazel::bazel' do
     context "on #{platform} #{version}" do
       let(:chef_run) {
         runner = ChefSpec::SoloRunner.new(
-          platform: platform, version: version) do |node|
-            node.set.bazel.version = '0.2.0'
+          platform: platform, version: version,
+          step_into: 'bazel_installation',
+        ) do |node|
+            node.set.bazel.version = '0.2.3'
             node.set.bazel.prefix = '/opt/local/libexec'
           end
         runner.converge(described_recipe)
@@ -17,9 +19,9 @@ describe 'bazel::bazel' do
       let(:installer_name) do
         case platform
         when 'mac_os_x'
-          'bazel-0.2.0-installer-darwin-x86_64.sh'
+          'bazel-0.2.3-installer-darwin-x86_64.sh'
         else
-          'bazel-0.2.0-installer-linux-x86_64.sh'
+          'bazel-0.2.3-installer-linux-x86_64.sh'
         end
       end
       let(:installer_path) {
@@ -51,6 +53,72 @@ describe 'bazel::bazel' do
         expect(installer).to do_nothing
         expect(installer).to subscribe_to("remote_file[#{installer_path}]")
       end
+    end
+  end
+
+  describe 'with homebrew provider' do
+    let(:chef_run) {
+      runner = ChefSpec::SoloRunner.new(
+        platform: 'mac_os_x', version: '10.11.1',
+        step_into: 'bazel_installation_homebrew',
+      ) do |node|
+        node.set.bazel.version = '0.2.3'
+        node.set.bazel.installation_method = 'homebrew'
+      end
+      runner.converge(described_recipe)
+    }
+
+    before {
+      stub_command("which git").and_return(true)
+    }
+
+    it 'installs bazel package' do
+      expect(chef_run).to install_homebrew_package('bazel').
+        with(version: '0.2.3')
+    end
+  end
+
+  describe 'with apt provider' do
+    let(:chef_run) {
+      runner = ChefSpec::SoloRunner.new(
+        platform: 'ubuntu', version: '14.04',
+        step_into: 'bazel_installation_apt',
+      ) do |node|
+        node.set.bazel.version = '0.2.3'
+        node.set.bazel.installation_method = 'apt'
+      end
+      runner.converge(described_recipe)
+    }
+
+    it 'reigsters bazel apt source' do
+      expect(chef_run).to add_apt_repository('bazel')
+    end
+
+    it 'installs bazel package' do
+      expect(chef_run).to install_apt_package('bazel').
+        with(version: '0.2.3')
+    end
+  end
+
+  describe 'with apt provider' do
+    let(:chef_run) {
+      runner = ChefSpec::SoloRunner.new(
+        platform: 'ubuntu', version: '14.04',
+        step_into: 'bazel_installation_apt',
+      ) do |node|
+        node.set.bazel.version = '0.2.3'
+        node.set.bazel.installation_method = 'apt'
+      end
+      runner.converge(described_recipe)
+    }
+
+    it 'reigsters bazel apt source' do
+      expect(chef_run).to add_apt_repository('bazel')
+    end
+
+    it 'installs bazel package' do
+      expect(chef_run).to install_apt_package('bazel').
+        with(version: '0.2.3')
     end
   end
 end

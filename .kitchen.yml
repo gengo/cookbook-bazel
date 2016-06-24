@@ -3,3 +3,9 @@ suites:
   - name: default
     run_list:
       - recipe[bazel::default]
+  - name: package
+    run_list:
+      - recipe[bazel::default]
+    attributes:
+      bazel:
+        installation_method: package

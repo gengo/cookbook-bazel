@@ -8,30 +8,29 @@
 #
 
 include_recipe 'java'
-include_recipe 'zip' unless node.platform_family == 'mac_os_x'
 include_recipe 'bazel::cxx'
 
-# Bazel installer requires which(1)
-if platform_family?('rhel', 'centos')
-  package 'which'
-end
-
-case spec = [node.os, node.kernel.machine]
-when ['darwin', 'x86_64'], ['linux', 'x86_64']
-  version = node.bazel.version
-  installer = "#{version}/bazel-#{version}-installer-#{spec[0]}-#{spec[1]}.sh"
-  installer_path = File.join(Chef::Config[:file_cache_path], File.basename(installer))
-
-  remote_file installer_path do
-    source "https://github.com/bazelbuild/bazel/releases/download/#{installer}"
-    mode 00755
+case node.bazel.installation_method
+when 'apt'
+  bazel_installation_apt 'bazel' do
+    action :create
   end
-
-  prefix = node.bazel.prefix
-  execute "#{installer_path} --prefix=#{prefix}" do
-    action :nothing
-    subscribes :run, "remote_file[#{installer_path}]", :immediately
+when 'homebrew'
+  bazel_installation_homebrew 'bazel' do
+    action :create
+  end
+when 'package'
+  bazel_installation_package 'bazel' do
+    action :create
+  end
+when 'script'
+  include_recipe 'zip' unless node.platform_family == 'mac_os_x'
+  bazel_installation_script 'bazel' do
+    action :create
   end
 else
-  raise 'only supports darwin and linux'
+  include_recipe 'zip' unless node.platform_family == 'mac_os_x'
+  bazel_installation 'bazel' do
+    action :create
+  end
 end
