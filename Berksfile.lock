@@ -6,7 +6,7 @@ DEPENDENCIES
 GRAPH
   apt (4.0.1)
     compat_resource (>= 12.10)
-  bazel (0.1.1)
+  bazel (0.1.2)
     apt (>= 0.0.0)
     build-essential (>= 0.0.0)
     homebrew (>= 0.0.0)
