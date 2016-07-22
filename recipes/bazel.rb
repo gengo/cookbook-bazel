@@ -27,6 +27,9 @@ when 'script'
   include_recipe 'zip' unless node.platform_family == 'mac_os_x'
   bazel_installation_script 'bazel' do
     action :create
+    node.bazel.installation_script.each do |name, value|
+      send(name, value)
+    end
   end
 else
   include_recipe 'zip' unless node.platform_family == 'mac_os_x'
