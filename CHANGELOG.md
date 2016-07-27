@@ -1,6 +1,10 @@
 bazel CHANGELOG
 ========================
 
+0.2.0
+-----
+- [yugui] - make properties for script installation accessible from recipe
+
 0.1.2
 -----
 - [yugui] - Extract installation process form recipes into resources

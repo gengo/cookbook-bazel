@@ -15,6 +15,10 @@ when 'apt'
   bazel_installation_apt 'bazel' do
     action :create
   end
+when 'dpkg'
+  bazel_installation_dpkg 'bazel' do
+    action :create
+  end
 when 'homebrew'
   bazel_installation_homebrew 'bazel' do
     action :create
