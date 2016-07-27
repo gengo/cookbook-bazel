@@ -6,3 +6,4 @@ default.bazel.prefix = '/usr/local'
 default.bazel.installation_method = nil  # automatic
 
 default.bazel.installation_script = {}
+default.bazel.installation_dpkg.uri = nil

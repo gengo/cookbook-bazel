@@ -100,25 +100,29 @@ describe 'bazel::bazel' do
     end
   end
 
-  describe 'with apt provider' do
+  describe 'with dpkg provider' do
     let(:chef_run) {
       runner = ChefSpec::SoloRunner.new(
         platform: 'ubuntu', version: '14.04',
-        step_into: 'bazel_installation_apt',
+        step_into: 'bazel_installation_dpkg',
       ) do |node|
-        node.set.bazel.version = '0.2.3'
-        node.set.bazel.installation_method = 'apt'
+        node.set.bazel.version = '0.3.1~rc1'
+        node.set.bazel.installation_method = 'dpkg'
       end
       runner.converge(described_recipe)
     }
 
-    it 'reigsters bazel apt source' do
-      expect(chef_run).to add_apt_repository('bazel')
+    let(:deb_path) {
+      File.join(Chef::Config[:file_cache_path], "bazel_0.3.1~rc1_amd64.deb")
+    }
+
+    it 'downloads deb file' do
+      expect(chef_run).to create_remote_file(deb_path)
     end
 
     it 'installs bazel package' do
-      expect(chef_run).to install_apt_package('bazel').
-        with(version: '0.2.3')
+      expect(chef_run).to install_dpkg_package('bazel').
+        with(source: deb_path)
     end
   end
 end
