@@ -10,7 +10,7 @@
 include_recipe 'java'
 include_recipe 'bazel::cxx'
 
-case node.bazel.installation_method
+case node['bazel']['installation_method']
 when 'apt'
   bazel_installation_apt 'bazel' do
     action :create
@@ -28,15 +28,15 @@ when 'package'
     action :create
   end
 when 'script'
-  include_recipe 'zip' unless node.platform_family == 'mac_os_x'
+  include_recipe 'zip' unless node['platform_family'] == 'mac_os_x'
   bazel_installation_script 'bazel' do
     action :create
-    node.bazel.installation_script.each do |name, value|
+    node['bazel']['installation_script'].each do |name, value|
       send(name, value)
     end
   end
 else
-  include_recipe 'zip' unless node.platform_family == 'mac_os_x'
+  include_recipe 'zip' unless node['platform_family'] == 'mac_os_x'
   bazel_installation 'bazel' do
     action :create
   end

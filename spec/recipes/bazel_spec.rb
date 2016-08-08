@@ -11,8 +11,8 @@ describe 'bazel::bazel' do
           platform: platform, version: version,
           step_into: 'bazel_installation',
         ) do |node|
-            node.set.bazel.version = '0.2.3'
-            node.set.bazel.prefix = '/opt/local/libexec'
+            node.override['bazel']['version'] = '0.2.3'
+            node.override['bazel']['prefix'] = '/opt/local/libexec'
           end
         runner.converge(described_recipe)
       }
@@ -62,8 +62,8 @@ describe 'bazel::bazel' do
         platform: 'mac_os_x', version: '10.11.1',
         step_into: 'bazel_installation_homebrew',
       ) do |node|
-        node.set.bazel.version = '0.2.3'
-        node.set.bazel.installation_method = 'homebrew'
+        node.override['bazel']['version'] = '0.2.3'
+        node.override['bazel']['installation_method'] = 'homebrew'
       end
       runner.converge(described_recipe)
     }
@@ -84,8 +84,8 @@ describe 'bazel::bazel' do
         platform: 'ubuntu', version: '14.04',
         step_into: 'bazel_installation_apt',
       ) do |node|
-        node.set.bazel.version = '0.2.3'
-        node.set.bazel.installation_method = 'apt'
+        node.override['bazel']['version'] = '0.2.3'
+        node.override['bazel']['installation_method'] = 'apt'
       end
       runner.converge(described_recipe)
     }
@@ -106,8 +106,8 @@ describe 'bazel::bazel' do
         platform: 'ubuntu', version: '14.04',
         step_into: 'bazel_installation_dpkg',
       ) do |node|
-        node.set.bazel.version = '0.3.1~rc1'
-        node.set.bazel.installation_method = 'dpkg'
+        node.override['bazel']['version'] = '0.3.1~rc1'
+        node.override['bazel']['installation_method'] = 'dpkg'
       end
       runner.converge(described_recipe)
     }
