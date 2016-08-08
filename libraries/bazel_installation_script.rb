@@ -9,7 +9,7 @@ module BazelCookbook
 
     provides :bazel_installation_script
     provides :bazel_installation, os: ['linux', 'darwin'] do |node|
-      node.kernel.machine == 'x86_64'
+      node['kernel']['machine'] == 'x86_64'
     end
  
     action :create do
@@ -33,17 +33,17 @@ module BazelCookbook
 
     private
     def default_prefix
-      node.bazel.prefix
+      node['bazel']['prefix']
     end
 
     def default_installer_uri
-      platform = "#{node.os}-#{node.kernel.machine}"
+      platform = "#{node['os']}-#{node['kernel']['machine']}"
       installer = "#{version}/bazel-#{version}-installer-#{platform}.sh"
       return "https://github.com/bazelbuild/bazel/releases/download/#{installer}"
     end
 
     def default_installer_hash
-      key = [node.os, version]
+      key = [node['os'], version]
       {
         %w[linux  0.2.3] => 'e0e4efe35b2c9f2b1f3c3929fc401e27c312090e6a305c046ecb59b9e3128e00',
         %w[darwin 0.2.3] => 'edd82b987dc40a0f23647cfd5fc7d2af5e47b182ea51c07ca1889f04c4fe2b98',

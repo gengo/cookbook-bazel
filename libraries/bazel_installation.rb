@@ -8,7 +8,7 @@ module BazelCookbook
 
     private
     def default_version
-      node.bazel.version
+      node['bazel']['version']
     end
   end
 end
