@@ -19,6 +19,8 @@ module BazelCookbook
         mode   00644
       end
 
+      apt_package 'pkg-config'
+
       dpkg_package 'bazel' do
         source  path
         version new_resource.version
